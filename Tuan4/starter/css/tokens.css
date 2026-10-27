@@ -1,0 +1,133 @@
+/* ==========================================================================
+   tokens.css — Design token của EduHub Web
+   Mọi tệp khác chỉ dùng var(--…) khai báo ở đây, không viết mã màu trực tiếp.
+   Ch04 sẽ chép các token này sang @theme của Tailwind.
+   ========================================================================== */
+
+:root {
+  /* Bảng màu gốc của dự án (cho sẵn) */
+  --palette-blue-900: #001d45;   /* tối */
+  --palette-blue-700: #003f87;   /* chính */
+  --palette-blue-50: #f0f7ff;    /* nền */
+  --palette-cyan-500: #00c4cc;   /* nhấn */
+  --palette-ink: #1a1a2e;        /* chữ */
+  --palette-white: #ffffff;
+
+  --palette-yellow-900: #7c6702;
+  --palette-yellow-700: #ddc23a;
+  --palette-yellow-50: #ecda81;
+
+  --palette-red-900: #7c0202;
+  --palette-red-700: #e12626;
+  --palette-red-50: #ec8181;
+
+  --palette-green-900: #127c02;
+  --palette-green-700: #24cb2c;
+  --palette-green-50: #8dec81;
+
+  /* TODO(ch2-T1): Màu theo vai trò (semantic), lấy giá trị từ palette ở trên:
+       --color-primary, --color-on-primary, --color-accent, --color-bg, --color-surface,
+       --color-text, --color-text-muted, --color-border, --color-link, --color-focus,
+       --color-warning, --color-warning-bg, --color-danger, --color-success,
+       --color-header-bg, --color-header-text */
+
+       --color-primary: var(--palette-blue-700);
+       --color-on-primary: var(--palette-white);
+       --color-accent: var(--palette-cyan-500);
+       --color-bg: var(--palette-blue-50);
+       --color-surface: var(--palette-white);
+       --color-text: var(--palette-ink);
+       --color-text-muted: #6B7280;
+       --color-border: #cbd5e1;
+       --color-link: var(--palette-blue-700);
+       --color-focus: var(--palette-cyan-500);
+       --color-warning: var(--palette-yellow-700);
+       --color-warning-bg: var(--palette-yellow-50);
+       --color-danger: var(--palette-red-700);
+       --color-success: var(--palette-green-700);
+       --color-header-bg: var(--palette-blue-900);
+       --color-header-text: var(--palette-white);
+
+  /* TODO(ch2-T1): Chữ
+       --font-sans: "Be Vietnam Pro", system-ui, … , sans-serif;  (không tải font ngoài)
+       Thang cỡ chữ --text-sm … --text-3xl; ít nhất một cỡ dùng clamp(min, co giãn, max) */
+       --font-sans: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, Barlow, Arial, sans-serif ;
+       --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+       --text-xs: 0.75rem; /*12px*/
+       --text-sm: 0.875rem; /*14px*/
+       --text-base: 1rem; /*16px*/
+       --text-lg: 1.125rem; /*18px*/
+       --text-xl:1.25rem; /*20px*/
+       --text-xxl: 1.375rem; /*22px*/
+       --text-3xl: clamp(1.5rem, 1.3rem + 2.4vw, 3rem); /*Tiêu đề chính của trang wed*/
+     
+
+  /* TODO(ch2-T1): Khoảng cách theo thang 4px bằng rem: --space-1 (0.25rem), --space-2, --space-3,
+       --space-4, --space-6, --space-8, --space-12, --space-16 */
+       --space-1: 0.25rem;
+       --space-2: 0.5rem;
+       --space-3: 0.75rem;
+       --space-4: 1rem;
+       --space-6: 1.5rem;
+       --space-8: 2rem;
+       --space-12: 3rem;
+       --space-16: 4rem;
+
+  /* TODO(ch2-T1): Bo góc --radius-sm/md/lg/full; đổ bóng --shadow-sm/md/lg;
+       --container-max (vd. 72rem); thời gian chuyển động --duration-fast/normal */
+       --radius-sm: 0.25rem; /*4px*/
+       --radius-md: 0.5rem; /*8px*/
+       --radius-lg: 1rem; /*16px*/
+       --radius-full: 9999px;
+       
+       /*box-shadow: X Y BLUR [SPREAD] rgb(0 0 0 / ĐộTrongSuốt); */
+       --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.08);
+       --shadow-md: 0 4px 12px rgb(0 0 0 / 0.1);
+       --shadow-lg: 0 12px 24px rgb(0 0 0 / 0.15);
+       
+       --container-max: 72rem;
+
+       --duration-fast: 150ms;
+       --duration-normal: 250ms;
+
+  /* TODO(ch2-T1): Ghi chú breakpoint (var() KHÔNG dùng được trong @media, chỉ để tra cứu):
+       --breakpoint-sm: 40rem;  (640px)   --breakpoint-lg: 64rem;  (1024px) */
+       --breakpoint-sm: 40rem;
+       --breakpoint-lg: 64rem;
+
+  /* TODO(ch2-T1): color-scheme: light dark; */
+       --color-scheme: light dark; /*Báo cho browe biết wed sp sáng và tối*/
+}
+
+/* TODO(ch2-T1): Dark mode — trong @media (prefers-color-scheme: dark) { :root { … } }
+   chỉ đổi giá trị các token --color-* (nền tối, chữ sáng, primary sáng hơn để đủ tương phản). */
+   /*GEMINI gợi ý bảng màu cho mode dark*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 1. Nền và Bề mặt: Đảo ngược từ sáng sang tối */
+    --color-bg: var(--palette-ink);              /* Nền toàn trang chuyển sang màu tối #1a1a2e */
+    --color-surface: var(--palette-blue-900);     /* Các thẻ card, form chuyển sang xanh đen nổi trên nền */
+    --color-border: var(--palette-blue-700);      /* Viền các khối chuyển sang xanh sẫm */
+
+    /* 2. Chữ: Đảo ngược từ tối sang sáng */
+    --color-text: var(--palette-blue-50);         /* Chữ chính sáng màu để dễ đọc trên nền tối */
+    --color-text-muted: var(--palette-cyan-500);  /* Chữ phụ, ngày giờ nổi bật nhẹ */
+
+    /* 3. Nút bấm và Điểm nhấn */
+    --color-primary: var(--palette-blue-300);     /* Màu nút bấm sáng hơn để bắt mắt */
+    --color-on-primary: var(--palette-blue-900);  /* Chữ trên nút chuyển thành màu tối tương phản */
+    --color-link: var(--palette-cyan-500);        /* Link sáng màu */
+    --color-focus: var(--palette-cyan-500);
+
+    /* 4. Trạng thái cảnh báo (đảo ngược chữ sáng - nền tối) */
+    --color-warning: var(--palette-yellow-50);
+    --color-warning-bg: var(--palette-yellow-900);
+    --color-danger: var(--palette-red-50);
+    --color-success: var(--palette-green-50);
+    /* 5. Header */
+
+    --color-header-bg: var(--palette-ink);
+    --color-header-text: var(--palette-white);
+  }
+}
